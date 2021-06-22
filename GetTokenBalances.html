@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Get Balance of Token created</title>   
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
+
+    <script type="text/javascript" src="web3.min.js"></script>
+    <script type="text/javascript" src="TokenABI.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <style>
+        .center {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 38px;
+        
+        }
+        </style>
+
+</head>
+<body>
+    <div>
+        <h1> Assume this is our previous project html. Since we are from different groups of previous projects, we just take one sample html of previous project </h1>
+        <h3> Then hor our group member's names to put here are listed below. Two members name are excluded because hor, NUS will get very confused if have same people submit one technical and one non technical homework</h3>
+        <ul>
+            <li>Yong Kok Jung</li>
+            <li>Angela Tan Yen Feng</li>
+            <li>Glenn Edward Pedley</li>
+            <li>Tan Ming Hong</li>
+            <li>Stephanie Ng Sio Khim</li>
+            <li>You didn't see <del>Tan Siew Poh</del></li>
+            <li>You are unable to see <del>Seow Rui Hao</del></li>
+          </ul>
+
+    </div>
+    <div>
+        <table>
+          <button class = "btn btn-info" onclick="getFromServer()">View All</button>  
+          <tr>
+            <h2> Please enter your details to join as a Monster Alliance Member</h2>
+            <h3>Leave MemberID blank for joining members</h3>
+            <td>Given Name: </td><td><input type="text" name="GivenName" id ="GivenName"></td>
+          </tr>
+          <tr>
+            <td>Last Name: </td><td><input type="text" name="LastName" id="LastName"></td>
+          </tr>
+          <tr>
+            <td>Number of Bedrooms</td><td><input type="text" name="NoOfBedrooms" id="NoOfBedrooms"></td>
+          </tr>
+          <tr>
+            <td>Budget</td> <td><input type="text" name="Budget" id="Budget"></td>
+          </tr>
+          <tr>
+            <td>Location</td><td><input type="text" name="Loc" id="Loc"></td><br>
+          </tr>
+
+          <tr>
+            <td>Member Id:</td><td><input type="text" name="MemberID" id="MemberID"></td>
+          </tr>
+        </table> 
+      </div>
+      <button class = "btn btn-info" onclick="postData()">Create</button>  
+      <button class = "btn btn-info" onclick="updateData()">Update</button>
+      
+
+
+      <button class = "btn btn-info" onclick="deleteData()">Delete</button>  
+
+      
+      <div class="mypanel">
+             
+      </div>
+      <br />
+      <br />
+      <br />
+      <br />
+
+
+
+
+<h1>Admire finish oledi above, then, our homework start from here</h1>
+<br/>
+
+
+<div class="center">
+<button class="magicButton">Place mouse cursor over this rectangle (button) and press the left button of the mouse (left click) to start the process of calling the account stuff
+
+</button>
+</div>
+<div class ="intro" id ="intro">
+
+    <h2> This is My Account address from My metamask: <span style="color:rgb(31, 194, 31)" class="thisIsMyAccountAddress"></span></h2>
+
+
+    <h2>This one shows the balance in the above said account: <span style="color: blue" class="showMyAccountBalance"></span></h2>
+</div>
+<br />
+<br />
+
+
+
+    <p>Here got this input box because we want to see other people's balance also (How can only see own one?):</p>
+    <input type="text" size="88" id="address" /><br/>
+    <button type="button" onClick="getBalance();">Show me the Balance of Ethereum (the fake one)!</button>
+    <br />
+    <br />
+
+    <div style="color:blue" id="output"></div>
+
+    <br />
+    <br />
+    <p>Here putlah the Token Contract Address (Don't want hard code hard code all, got many tokens how?):</p>
+    <input type="text" size="88" id="contractAddress" /><br/>
+    <button type="button" onClick="getTokenBalance();">Show me the Token Balance and NAME!</button>
+    <br />
+    <br />
+  
+    <div style="color:blueviolet" id="output2"></div>
+    <br />
+    <br />
+
+
+    <script>if (typeof window.ethereum !=='undefined') {
+        console.log('metamask is installed');
+        }else{
+        console.log('install metamask')
+        document.querySelector('.magicButton').innerHTML="<a href='https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn' target='_blank'> Install Metamask</a>";
+        document.querySelector('.intro').style.display='none'
+        }
+        
+        
+        const ethereumButton=document.querySelector('.magicButton');
+        const showAccount= document.querySelector('.thisIsMyAccountAddress');
+        const showBalance = document.querySelector('.showMyAccountBalance')
+        ethereumButton.addEventListener('click',()=> {
+    
+        getAccount();
+        }); 
+        
+        async function getAccount(){
+            const accounts = await ethereum.request({ method: 'eth_requestAccounts'});
+            const account = accounts[0];
+            showAccount.innerHTML=account;
+           
+        
+            const balance = await ethereum
+            .request ({
+            method:'eth_getBalance',
+            params:[account,"latest"],
+            });
+          
+            const read = parseInt(balance)/10**18;
+            console.log(read.toFixed(5));
+            showBalance.innerHTML=read.toFixed(9);
+            
+    
+            }       
+        
+    
+    
+            window.addEventListener('load', function () {
+                if (typeof web3 !== 'undefined') {
+                    console.log('Web3 Detected! ' + web3.currentProvider.constructor.name)
+                    window.web3 = new Web3(web3.currentProvider);
+                } else {
+                    console.log('No Web3 Detected... using HTTP Provider')
+                    window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+                }
+            })
+            
+            const promisify = (inner) =>
+                new Promise((resolve, reject) =>
+                    inner((err, res) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(res);
+                        }
+                    })
+                );
+            
+            async function getBalance() {
+                var address, wei, balance
+                address = document.getElementById("address").value;
+                wei = promisify(cb => web3.eth.getBalance(address, cb))
+                try {
+                    balance = web3.fromWei(await wei, 'ether')
+                    document.getElementById("output").innerHTML = balance + " ETH";
+                } catch (error) {
+                    document.getElementById("output").innerHTML = error;
+                }
+            }
+            async function getTokenBalance() {
+                var address, contractAddress, contractABI, tokenContract, decimals, balance, name, symbol, adjustedBalance
+                address = document.getElementById("address").value
+                contractAddress = document.getElementById("contractAddress").value
+                contractABI = TokenABI
+            
+                tokenContract = web3.eth.contract(contractABI).at(contractAddress)
+            
+                decimals = promisify(cb => tokenContract.decimals(cb))
+                balance = promisify(cb => tokenContract.balanceOf(address, cb))
+                name = promisify(cb => tokenContract.name(cb))
+                symbol = promisify(cb => tokenContract.symbol(cb))
+            
+                try {
+                    adjustedBalance = await balance / Math.pow(10, await decimals)
+                    document.getElementById("output2").innerHTML = adjustedBalance;
+                    document.getElementById("output2").innerHTML += " " + await symbol + " (" + await name + ")";
+                } catch (error) {
+                    document.getElementById("output2").innerHTML = error;
+                }
+            }
+                   
+        
+    
+    
+    </script>
+    <script>var TokenABI = [
+        {
+            "constant": true,
+            "inputs": [],
+            "name": "name",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "string"
+                }
+            ],
+            "payable": false,
+            "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [],
+            "name": "symbol",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "string"
+                }
+            ],
+            "payable": false,
+            "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [],
+            "name": "decimals",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint8"
+                }
+            ],
+            "payable": false,
+            "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [],
+            "name": "totalSupply",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [
+                {
+                    "name": "_owner",
+                    "type": "address"
+                }
+            ],
+            "name": "balanceOf",
+            "outputs": [
+                {
+                    "name": "balance",
+                    "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "_to",
+                    "type": "address"
+                },
+                {
+                    "name": "_value",
+                    "type": "uint256"
+                }
+            ],
+            "name": "transfer",
+            "outputs": [
+                {
+                    "name": "success",
+                    "type": "bool"
+                }
+            ],
+            "payable": false,
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "_from",
+                    "type": "address"
+                },
+                {
+                    "name": "_to",
+                    "type": "address"
+                },
+                {
+                    "name": "_value",
+                    "type": "uint256"
+                }
+            ],
+            "name": "transferFrom",
+            "outputs": [
+                {
+                    "name": "success",
+                    "type": "bool"
+                }
+            ],
+            "payable": false,
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "_spender",
+                    "type": "address"
+                },
+                {
+                    "name": "_value",
+                    "type": "uint256"
+                }
+            ],
+            "name": "approve",
+            "outputs": [
+                {
+                    "name": "success",
+                    "type": "bool"
+                }
+            ],
+            "payable": false,
+            "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [
+                {
+                    "name": "_owner",
+                    "type": "address"
+                },
+                {
+                    "name": "_spender",
+                    "type": "address"
+                }
+            ],
+            "name": "allowance",
+            "outputs": [
+                {
+                    "name": "remaining",
+                    "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "type": "function"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "name": "_from",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "name": "_to",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "_value",
+                    "type": "uint256"
+                }
+            ],
+            "name": "Transfer",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "name": "_owner",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "name": "_spender",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "_value",
+                    "type": "uint256"
+                }
+            ],
+            "name": "Approval",
+            "type": "event"
+        },
+        {
+            "inputs": [
+                {
+                    "name": "_initialAmount",
+                    "type": "uint256"
+                },
+                {
+                    "name": "_tokenName",
+                    "type": "string"
+                },
+                {
+                    "name": "_decimalUnits",
+                    "type": "uint8"
+                },
+                {
+                    "name": "_tokenSymbol",
+                    "type": "string"
+                }
+            ],
+            "payable": false,
+            "type": "constructor"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "_spender",
+                    "type": "address"
+                },
+                {
+                    "name": "_value",
+                    "type": "uint256"
+                },
+                {
+                    "name": "_extraData",
+                    "type": "bytes"
+                }
+            ],
+            "name": "approveAndCall",
+            "outputs": [
+                {
+                    "name": "success",
+                    "type": "bool"
+                }
+            ],
+            "payable": false,
+            "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [],
+            "name": "version",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "string"
+                }
+            ],
+            "payable": false,
+            "type": "function"
+        }
+    ];
+    </script>
+
+
+</body>
+</html>
