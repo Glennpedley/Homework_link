@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Get Balance of Token created</title>   
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
+
+    <script type="text/javascript" src="web3.min.js"></script>
+    <script type="text/javascript" src="TokenABI.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <style>
+        .center {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 38px;
+        
+        }
+        </style>
+
+</head>
+<body>
+    <div>
+      <h1> Assume this is our previous project html. Since we are from different groups of previous projects, we just take one sample html of previous project </h1>
+      <h3> Then hor our group member's names to put here are listed below. Two members name are excluded because one person can only submit one technical or one non technical homework, so these people have to choose a group and they are not listed in our group even though they contributed</h3>
+      <ul>
+          <li>Yong Kok Jung</li>
+          <li>Angela Tan Yen Feng</li>
+          <li>Glenn Edward Pedley</li>
+          <li>Tan Ming Hong</li>
+          <li>Stephanie Ng Sio Khim</li>
+          <li>You didn't see <del>Tan Siew Poh</del></li>
+          <li>You are unable to see <del>Seow Rui Hao</del></li>
+        </ul>
+    </div>
+    <div>
+        <table>
+          <button class = "btn btn-info" onclick="getFromServer()">View All</button>  
+          <tr>
+            <h2> Please enter your details to join as a Monster Alliance Member</h2>
+            <h3>Leave MemberID blank for joining members</h3>
+            <td>Given Name: </td><td><input type="text" name="GivenName" id ="GivenName"></td>
+          </tr>
+          <tr>
+            <td>Last Name: </td><td><input type="text" name="LastName" id="LastName"></td>
+          </tr>
+          <tr>
+            <td>Number of Bedrooms</td><td><input type="text" name="NoOfBedrooms" id="NoOfBedrooms"></td>
+          </tr>
+          <tr>
+            <td>Budget</td> <td><input type="text" name="Budget" id="Budget"></td>
+          </tr>
+          <tr>
+            <td>Location</td><td><input type="text" name="Loc" id="Loc"></td><br>
+          </tr>
+
+          <tr>
+            <td>Member Id:</td><td><input type="text" name="MemberID" id="MemberID"></td>
+          </tr>
+        </table> 
+      </div>
+      <button class = "btn btn-info" onclick="postData()">Create</button>  
+      <button class = "btn btn-info" onclick="updateData()">Update</button>
+      
+
+
+      <button class = "btn btn-info" onclick="deleteData()">Delete</button>  
+
+      
+      <div class="mypanel">
+             
+      </div>
+      <br />
+      <br />
+      <br />
+      <br />
+
+
+
+
+<h1>Admire finish oledi above, then, our homework start from here</h1>
+<br/>
+
+
+<div class="center">
+<button class="magicButton">Place mouse cursor over this rectangle (button) and press the left button of the mouse (left click) to start the process of calling the account stuff
+
+</button>
+</div>
+<div class ="intro" id ="intro">
+
+    <h2> This is My Account address from My metamask: <span style="color:rgb(31, 194, 31)" class="thisIsMyAccountAddress"></span></h2>
+
+
+    <h2>This one shows the balance in the above said account: <span style="color: blue" class="showMyAccountBalance"></span></h2>
+</div>
+<br />
+<br />
+
+
+
+    <p>Here got this input box because we want to see other people's balance also (How can only see own one?):</p>
+    <input type="text" size="88" id="address" /><br/>
+    <button type="button" onClick="getBalance();">Show me the Balance of Ethereum (the fake one)!</button>
+    <br />
+    <br />
+
+    <div style="color:blue" id="output"></div>
+
+    <br />
+    <br />
+    <p>Here putlah the Token Contract Address (Don't want hard code hard code all, got many tokens how?):</p>
+    <input type="text" size="88" id="contractAddress" /><br/>
+    <button type="button" onClick="getTokenBalance();">Show me the Token Balance and NAME!</button>
+    <br />
+    <br />
+  
+    <div style="color:blueviolet" id="output2"></div>
+    <br />
+    <br />
+
+
+<script src=combine.js></script>
+
+
+</body>
+</html>
