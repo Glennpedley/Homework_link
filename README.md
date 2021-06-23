@@ -1,7 +1,7 @@
 # Homework_link
 This repository is for our homework to have a link to it
 
-One file, all in the html file so that easy to run.
+Two files, one html and one js, and named combine to remind us they work together.
 
 Group Homework, NUS– Get Balance of Token created
 
